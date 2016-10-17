@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="plugins/Leaflet.draw-master/dist/leaflet.draw.css" />
+  <style>
+    body {
+        padding: 0;
+        margin: 0;
+        }
+    html, body, #mapid {
+        height: 100%;
+        width: 100%;
+        }
+  </style>
+
+</head>
+<body>
+  <div id="mapid"></div>
+  
+  <script src="leaflet/leaflet.js"></script>
+  <script src="plugins/Leaflet.draw-master/dist/leaflet.draw.js"></script>
+  <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+  <script src="plugins/leaflet-plugins-master/layer/tile/Google.js"></script>
+  <script src="plugins/leaflet-plugins-master/layer/vector/KML.js"></script>
+  
+  <script type="text/javascript">
+
+    var santamaria = new L.LayerGroup();
+    L.marker([-29.68, -53.81]).bindPopup("Santa Maria").addTo(santamaria);
+
+    osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> '
+    });
+    var track = new L.KML("bairros.kml", {async: true});
+    track.on("loaded", function(e) {
+      map.fitBounds(e.target.getBounds());
+    });
+
+    var ggl = new L.Google('ROADMAP');
+    var mymap = L.map('mapid', {
+      center:[-29.68, -53.81],
+      zoom:10,
+      layers: [ggl, santamaria, track]
+    });
+
+         
+    
+
+  </script>
+</body>
+</html>
