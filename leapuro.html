@@ -1,0 +1,274 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="plugins/Leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" type="text/css" href="plugins/Leaflet/docs/docs/css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="plugins/Leaflet/docs/docs/css/normalize.css"/>
+  <link rel="stylesheet" type="text/css" href="plugins/Leaflet/debug/css/mobile.css"/>
+  <link rel="stylesheet" type="text/css" href="plugins/Leaflet/debug/css/screen.css"/>
+  <link rel="stylesheet" href="plugins/leaflet.shapefile-gh-pages/gh-pages.css" />
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        }
+    html, body, #mapid {
+        height: 100%;
+        width: 100%;
+        }
+</style>
+</head>
+<body>
+<div id="mapid"></div>
+<script src="plugins/Leaflet/dist/leaflet-src.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/dist/leaflet.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/docs/docs/highlight/highlight.pack.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/docs/docs/js/docs.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/control/Control.Attribution.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/control/Control.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/control/Control.Layers.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/control/Control.Scale.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/control/Control.Zoom.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/core/Browser.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/core/Class.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/core/Events.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/core/Handler.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/core/Util.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/dom/DomEvent.DoubleTap.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/dom/DomEvent.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/dom/DomUtil.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/dom/Draggable.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/dom/PosAnimation.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/crs/CRS.Earth.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/crs/CRS.EPSG3395.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/crs/CRS.EPSG3857.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/crs/CRS.EPSG4326.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/crs/CRS.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/crs/CRS.Simple.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/projection/Projection.LonLat.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/projection/Projection.Mercator.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/projection/Projection.SphericalMercator.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/LatLng.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geo/LatLngBounds.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geometry/Bounds.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geometry/LineUtil.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geometry/Point.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geometry/PolyUtil.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/geometry/Transformation.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/DivOverlay.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/FeatureGroup.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/GeoJSON.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/ImageOverlay.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/Layer.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/LayerGroup.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/Popup.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/Tooltip.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/marker/DivIcon.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/marker/Icon.Default.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/marker/Icon.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/marker/Marker.Drag.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/marker/Marker.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/tile/GridLayer.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/tile/TileLayer.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/tile/TileLayer.WMS.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Canvas.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Circle.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/CircleMarker.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Path.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Polygon.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Polyline.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Retangle.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/Renderer.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/SVG.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/layer/vector/SVG.VML.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/Map.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.BoxZoom.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.DoubleClickZoom.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.Drag.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.Keyboard.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.ScrollWheelZoom.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.Tap.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/src/map/handler/Map.TouchZoom.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/build/build.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/build/deps.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/build/docs.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/SpecHelper.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/control/Control.AttributionSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/control/Control.LayersSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/control/Control.ScaleSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/control/ControlSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/core/ClassSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/core/EventsSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/core/UtilSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/dom/DomEventSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/dom/DomUtilSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geo/CRSSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geo/LatLngBoundsSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geo/LatLngSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geo/ProjectionSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geometry/BoundsSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geometry/LineUtilSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geometry/PointSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geometry/PolyUtilSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/geometry/TransformationSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/FeatureGroupSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/GeoJSONSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/ImageOverlaySpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/LayerGroupSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/PopupSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/TooltipSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/marker/Icon.DefaultSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/marker/MarkerSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/tile/GridLayerSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/tile/TileLayerSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/CanvasSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/CircleSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/CircleMarkerSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/PathSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/PolygonSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/PolylineSpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/suites/layer/vector/PolylineGeometrySpec.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/after.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/expect.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/karma.conf.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/spec/sinon.js" type="text/javascript"></script>
+
+<script src="plugins/Leaflet/debug/leaflet-include.js" type="text/javascript"></script>
+<script src="plugins/Leaflet/Jakefile.js" type="text/javascript"></script>
+
+<script src="plugins/jquery-3.1.1.js" type="text/javascript"></script>
+<script src="plugins/jquery-3.1.1.min.js" type="text/javascript"></script>
+
+<script src="plugins/catiline-gh-pages/dist/catiline.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/dist/catiline.min.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/console.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/core.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/events.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/IE.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/nextTick.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/promise.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/queue.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/utils.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/worker.js" type="text/javascript"></script>
+<script src="plugins/catiline-gh-pages/src/wrapup.js" type="text/javascript"></script>
+
+<script src="plugins/shapefile-js/dist/shp.js" type="text/javascript"></script>
+<script src="plugins/shapefile-js/dist/shp.min.js" type="text/javascript"></script>
+
+<script src="plugins/leaflet.shapefile-gh-pages/catiline.js" type="text/javascript"></script>
+<script src="plugins/leaflet.shapefile-gh-pages/leaflet.shpfile.js" type="text/javascript"></script>
+<script src="plugins/leaflet.shapefile-gh-pages/shp.js" type="text/javascript"></script>
+
+<script src="plugins/togeojson/togeojson.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+  
+ var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> '
+  });
+
+  var mymap = L.map('mapid', {
+      center:[-29.68, -53.81],
+      zoom:10,
+      layers: [osm]
+  });
+  var bounds = new L.LatLngBounds(
+      new L.LatLng(-29.62,-53.94),
+      new L.LatLng(-29.80,-53.67));
+
+  mymap.fitBounds(bounds);
+
+
+  function getColor(d) {
+    return d =='4316907025'  ? '#ff794d' :
+          d =='4316907026'   ? '#fff2e6' :
+          d =='4316907027'   ? '#ffe6cc' :
+          d =='4316907028'   ? '#ffd9b3' :
+          d =='4316907023'   ? '#ffcc99' :
+          d =='4316907029'   ? '#ffbf80' :
+          d =='4316907021'   ? '#ffb366' :
+          d =='4316907001'   ? '#ffa64d' :
+          d =='4316907013'   ? '#ff9933' :
+          d =='4316907007'   ? '#ff8c1a' :
+          d =='4316907043'   ? '#ff8000' :
+          d =='4316907031'   ? '#e67300' :
+          d =='4316907032'   ? '#ff8000' :
+          d =='4316907030'   ? '#e67300' :
+          d =='4316907009'   ? '#fff2e6' :
+          d =='4316907011'   ? '#ffe6cc' :
+          d =='4316907018'   ? '#ffd9b3' :
+          d =='4316907033'   ? '#ffcc99' :
+          d =='4316907034'   ? '#ffbf80' :
+          d =='4316907038'   ? '#ffb366' :
+          d =='4316907002'   ? '#ffa64d' :
+          d =='4316907037'   ? '#ff6600' :
+          d =='4316907004'   ? '#e65c00' :
+          d =='4316907003'   ? '#fff0e6' :
+          d =='4316907008'   ? '#ffe0cc' :
+          d =='4316907005'   ? '#ffd1b3' :
+          d =='4316907035'   ? '#ffc299' :
+          d =='4316907036'   ? '#ffb380' :
+          d =='4316907016'   ? '#ffa366' :
+          d =='4316907022'   ? '#ff944d' :
+          d =='4316907010'   ? '#ff8533' :
+          d =='4316907019'   ? '#ff751a' :
+          d =='4316907017'   ? '#fff2e6' :
+          d =='4316907039'   ? '#ffe6cc' :
+          d =='4316907006'   ? '#ffd9b3' :
+          d =='4316907012'   ? '#ffcc99' :
+          d =='4316907040'   ? '#ffbf80' :
+          d =='4316907041'   ? '#ffb366' :
+          d =='4316907015'   ? '#ffa64d' :
+          d =='4316907014'   ? '#ff9933' :
+          d =='4316907042'   ? '#ff8c1a' :
+                    '#000000';
+  }
+  function style(feature) {
+    return {
+      weight: 2,
+      opacity: 1,
+      color: 'black',
+      dashArray: '3',
+      fillOpacity: 0.5,
+      fillColor: getColor(feature.properties.GEOCODIGO)
+    };
+  }
+
+  var geo = L.geoJson({features:[], style: style},{onEachFeature:function popUp(f,l){
+        var popupContent="<p><img src='parakmz.png'></img></p>";
+
+        var out = [];
+        if (f.properties){
+            for(var key in f.properties){
+              if (key=='NOME'){
+                var nomelabel=f.properties[key];
+                l.bindTooltip(nomelabel, {persistent:true });
+              }
+              out.push(key+": "+f.properties[key]);
+        }
+        l.bindPopup(popupContent + out.join("<br />"));
+    }
+  }}).addTo(mymap);
+  var base = 'bairros.zip';
+    shp(base).then(function(data){
+    geo.addData(data);
+    geo.setStyle(style);
+    });
+
+  var baseLayer={
+    "Áreas Institucionais": geo
+  }
+
+  L.control.layers(baseLayer).addTo(mymap);
+
+
+
+</script>
+
+</body>
+</html>

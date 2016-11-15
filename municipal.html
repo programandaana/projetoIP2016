@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Municipal</title>
+   <meta charset="utf-8" />
+  <script src="https://maps.googleapis.com/maps/api/js" async defer></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--  <link rel="stylesheet" href="../Leaflet/dist/leaflet.css" />
+  <script type="text/javascript" src="../Leaflet/dist/leaflet-src.js"></script>-->
+
+  <link rel="stylesheet" type="text/css" href="plugins/Leaflet/dist/leaflet.css"/>
+  <script src="plugins/Leaflet/dist/leaflet-src.js" type="text/javascript"></script>
+
+  <script type="text/javascript" src="plugins/Leaflet.GridLayer.GoogleMutant/Leaflet.GoogleMutant.js"></script>
+
+  <script src="http://api-maps.yandex.ru/2.0/?load=package.map&lang=ru-RU" type="text/javascript"></script>
+  <script src="plugins/Leaflet-plugins/layer/tile/Yandex.js"></script>
+
+  <script src="plugins/shapefile-js/dist/shp.js" type="text/javascript"></script>
+  <script src="plugins/shapefile-js/dist/shp.min.js" type="text/javascript"></script>
+
+  <script src="plugins/leaflet.shapefile-gh-pages/catiline.js" type="text/javascript"></script>
+  <script src="plugins/leaflet.shapefile-gh-pages/leaflet.shpfile.js" type="text/javascript"></script>
+  <script src="plugins/leaflet.shapefile-gh-pages/shp.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style-responsive.css" />
+  <link rel="shortcut icon" href="http://iplan.santamaria.rs.gov.br/img/favicon.ico" />
+
+  <link rel="stylesheet" href="plugins/Leaflet.draw/docs/libs/leaflet.css"/>
+  <link rel="stylesheet" href="plugins/Leaflet.draw/dist/leaflet.draw.css"/>
+
+  <script src="plugins/Leaflet.draw/docs/libs/libs/leaflet-src.js"></script>
+
+  <script src="plugins/Leaflet.draw/src/Leaflet.draw.js"></script>
+  <script src="plugins/Leaflet.draw/src/Leaflet.Draw.Event.js"></script>
+
+  <script src="plugins/Leaflet.draw/src/Toolbar.js"></script>
+  <script src="plugins/Leaflet.draw/src/Tooltip.js"></script>
+
+  <script src="plugins/Leaflet.draw/src/ext/GeometryUtil.js"></script>
+  <script src="plugins/Leaflet.draw/src/ext/LatLngUtil.js"></script>
+  <script src="plugins/Leaflet.draw/src/ext/LineUtil.Intersect.js"></script>
+  <script src="plugins/Leaflet.draw/src/ext/Polygon.Intersect.js"></script>
+  <script src="plugins/Leaflet.draw/src/ext/Polyline.Intersect.js"></script>
+  <script src="plugins/Leaflet.draw/src/ext/TouchEvents.js"></script>
+
+  <script src="plugins/Leaflet.draw/src/draw/DrawToolbar.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.Polyline.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.Circle.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.Marker.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.Polygon.js"></script>
+  <script src="plugins/Leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+  <script src="plugins/Leaflet.draw/src/edit/EditToolbar.js"></script>
+  <script src="plugins/Leaflet.draw/src/edit/handler/EditToolbar.Edit.js"></script>
+  <script src="plugins/Leaflet.draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+  <script src="plugins/Leaflet.draw/src/Control.Draw.js"></script>
+
+  <script src="plugins/Leaflet.draw/src/edit/handler/Edit.Poly.js"></script>
+  <script src="plugins/Leaflet.draw/src/edit/handler/Edit.SimpleShape.js"></script>
+  <script src="plugins/Leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
+  <script src="plugins/Leaflet.draw/src/edit/handler/Edit.Rectangle.js"></script>
+  <script src="plugins/Leaflet.draw/src/edit/handler/Edit.Marker.js"></script>
+
+  <script src="plugins/togeojson/togeojson.js" type="text/javascript"></script>
+  <script src="plugins/leaflet.FileLayer/src/leaflet.filelayer.js" type="text/javascript"></script>
+
+  <style>
+  #map {
+/*    margin: 32px; */
+/*    width: auto; */
+/*    overflow: visible; */
+    width: calc( 100vw - 64px );
+    height: calc( 100vh - 60px );
+  }
+  body { margin: 0 }
+
+  </style>
+</head>
+<body>
+
+<section id="container" class="">
+    <header class="header iplan-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i>
+        </div>
+      </div>
+
+
+      <div class="top-nav notification-row">                
+        <ul class="nav pull-right top-menu">
+          <li> <a href="index.html">Início</a> </li>
+          <li><a href="fichatecnica.html">Ficha Técnica</a></li>
+        </ul>
+      </div>
+    </header>
+
+   <section id="main-content">
+    <section class="wrapper">
+      <div class="row">
+        <div id="map" class="map"></div>
+      </div>
+    </section>
+  </section>
+        <script type="text/javascript">
+
+    var mapopts =  {
+//      zoomSnap: 0.1
+    };
+
+    var map = L.map('map', mapopts).setView([0,0],0);
+
+    var bounds = new L.LatLngBounds(
+      new L.LatLng(-29.54,-54.13),
+      new L.LatLng(-30.0,-53.51));
+
+    map.fitBounds(bounds);
+
+    var roadMutant = L.gridLayer.googleMutant({
+      maxZoom: 24,
+      type:'roadmap'
+    }).addTo(map);
+
+    var satMutant = L.gridLayer.googleMutant({
+      maxZoom: 24,
+      type:'satellite'
+    });
+
+    var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> '
+  });
+    var yndx = new L.Yandex();
+    var landmap= L.tileLayer('http://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="http://thunderforest.com/">Thunderforest</a> contributors, '
+    });
+    var wmsLayer= L.tileLayer.wms('http://demo.opengeo.org/geoserver/ows?', {
+    layers: 'nasa:bluemarble'
+    });
+
+
+    var popup = L.popup();
+
+      function onMapClick(e) {
+          popup
+          .setLatLng(e.latlng)
+          .setContent("Coordenadas do ponto: " + e.latlng.toString())
+          .openOn(map);
+        }
+
+          map.on('click', onMapClick);
+   
+    var localIcon = L.icon({
+      iconUrl:'local.png',
+      iconSize:     [15, 15],
+      iconAnchor:   [15, 15],
+      popupAnchor:  [-3, -76]
+
+    })
+
+    function getColorDis(d) {
+      return d =='431690705'  ? '#f2d9d9' :    
+          d =='431690723'   ? '#ecc6c6' :
+          d =='431690710'   ? '#e6b3b3' :
+          d =='431690733'   ? '#df9f9f' :
+          d =='431690735'   ? '#d98c8c' :
+          d =='431690750'   ? '#d27979' :
+          d =='431690712'   ? '#cc6666' :
+          d =='431690738'   ? '#c65353' :
+          d =='431690720'   ? '#bf4040' :
+          d =='431690715'   ? '#ac3939' :
+                   '#000000';
+  }
+    function styleDis(feature) {
+      return {
+        weight: 0.5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '0',
+        fillOpacity: 0.5,
+        fillColor: getColorDis(feature.properties.GEOCODIGO)
+    };
+  }
+
+  
+  var geoDis = L.geoJson({features:[], style: styleDis},{onEachFeature:function popUp(f,l){
+        var popupContent="<p><img src='parakmz.png'></img></p>";
+        var titulo="<div><b>Distritos do Município de Santa Maria</b></div><br/>";
+
+        var out = [];
+        if (f.properties){
+            for(var key in f.properties){
+              if (key=='NOME'){
+                var nomelabel=f.properties[key];
+                l.bindTooltip("IPLAN - Distrito de "+nomelabel, {persistent:true });
+              }
+              if (key=='OBJECTID'){
+                out.push();
+              }
+              else if (key=='CD_GEOCODS'){
+                out.push();
+              }
+              else if (key=='CD_GEOCODB'){
+                out.push();
+              }
+              else if (key=='GEOCODIGO'){
+                out.push();
+              }
+              else if (key=='NOME'){
+                out.push("Nome: "+f.properties[key]);
+              }
+              else if (key=='DIVDIS'){
+                out.push("Divisão Distrital: "+f.properties[key]);
+              }
+              else if (key=='LAREAKM2'){
+                out.push("Área (Legislação -km²): "+f.properties[key]);
+              }
+              else if(key=='Shape_len'){
+                out.push();
+              }
+              else if(key=='Shape_area'){
+                out.push();
+              }
+              else {
+                out.push(key+": "+f.properties[key]);
+              }
+        }
+        l.bindPopup(popupContent + titulo + out.join("<br />"));
+    }
+  }}).addTo(map);
+
+  function popUp2(f,l){
+        var popupContent="<div><img src='parakmz.png'></img></div>";
+        var titulo="<div><b>Localidades Distritais</b></div><br/>";
+
+        var out = [];
+        if (f.properties){
+            for(var key in f.properties){
+              if (key=='NOME'){
+                var nomelabel=f.properties[key];
+                l.bindTooltip("IPLAN - Localidade de "+nomelabel, {persistent:true });
+              }
+              if (key=='OBJECTID'){
+                out.push();
+              }
+              else if (key=='OBJECTID_1'){
+                out.push();
+              }
+              else if (key=='GEOCODIGO'){
+                out.push();
+              }
+              else if (key=='NOME'){
+                out.push("Nome: "+f.properties[key]);
+              }
+              else if(key=='Shape_len'){
+                out.push();
+              }
+              else if(key=='Shape_area'){
+                out.push();
+              }
+              else {
+                out.push(key+": "+f.properties[key]);
+              }
+        }
+        l.bindPopup(popupContent + titulo + out.join("<br />"));
+
+    }
+  }
+
+  var geoLocal = L.geoJson({features:[], icon: localIcon}, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {icon: localIcon});
+    },
+    onEachFeature: popUp2
+  }).addTo(map);
+
+  var baseDis = 'distritos.zip';
+    shp(baseDis).then(function(data){
+    geoDis.addData(data);
+    geoDis.setStyle(styleDis);
+    });
+
+  var baseLocal = 'localidades.zip';
+    shp(baseLocal).then(function(data){
+    geoLocal.addData(data);
+    geoLocal.setIcon(localIcon);
+    });
+
+  var baseMaps = {
+      'Google Estradas': roadMutant,
+      'Google Satélite': satMutant,
+      'Landscape': landmap,
+      'NASA': wmsLayer,
+      'Open Street Map': osm,
+      'Yandex (Rússia)':yndx,
+  };
+
+  var overlayMaps = {
+    'Distritos':geoDis,
+    'Localidades':geoLocal,
+  };
+
+  L.control.layers(baseMaps, overlayMaps, {collapsed: false
+    }).addTo(map);
+
+  var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    var drawControl = new L.Control.Draw({
+        position: 'topleft',
+        draw: {
+            polyline: true,
+            polygon: true,
+            circle: true,
+            marker: true
+        },
+        edit: {
+            featureGroup: drawnItems,
+            remove: true
+        }
+    });
+    map.addControl(drawControl);
+
+    map.on(L.Draw.Event.CREATED, function (e) {
+        var type = e.layerType,
+                layer = e.layer;
+
+        if (type === 'marker') {
+            layer.bindPopup('Marcador Criado!');
+        }
+
+        drawnItems.addLayer(layer);
+    });
+
+    map.on(L.Draw.Event.EDITED, function (e) {
+        var layers = e.layers;
+        var countOfEditedLayers = 0;
+        layers.eachLayer(function (layer) {
+            countOfEditedLayers++;
+        });
+        console.log("Edited " + countOfEditedLayers + " layers");
+    });
+
+    L.DomUtil.get('changeColor').onclick = function () {
+        drawControl.setDrawingOptions({rectangle: {shapeOptions: {color: '#004a80'}}});
+    };
+
+
+  </script>
+</body>
+</html>
